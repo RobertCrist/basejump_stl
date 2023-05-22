@@ -857,6 +857,12 @@ end
   logic [ways_p-1:0][block_size_in_words_p-1:0] tbuf_track_mem_w_mask;
   logic [ways_p-1:0][block_size_in_words_p-1:0] tbuf_track_mem_data;
 
+  // if(sets_p == 1) begin
+
+  // end else begin 
+
+  // end
+
   assign tbuf_track_mem_addr = tbuf_addr_lo[block_offset_width_lp+:lg_sets_lp];
   for (genvar i = 0 ; i < ways_p; i++) begin
     assign tbuf_track_mem_data[i] = {block_size_in_words_p{1'b1}};
