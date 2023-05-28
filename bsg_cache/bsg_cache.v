@@ -35,7 +35,7 @@ module bsg_cache
     ,localparam bsg_cache_dma_pkt_width_lp=`bsg_cache_dma_pkt_width(addr_width_p, block_size_in_words_p)
     ,localparam burst_size_in_words_lp=(dma_data_width_p/data_width_p)
 
-    ,parameter debug_p=0
+    ,parameter debug_p=1
   )
   (
     input clk_i
@@ -165,8 +165,12 @@ module bsg_cache
 
   logic [lg_sets_lp-1:0] addr_index_tl;
 
-  assign addr_index_tl =
-    addr_tl_r[block_offset_width_lp+:lg_sets_lp];
+  if(sets_p == 1) begin
+     assign addr_index_tl = 0;
+  end else begin 
+     assign addr_index_tl =
+      addr_tl_r[block_offset_width_lp+:lg_sets_lp];
+  end
 
   logic [lg_data_mem_els_lp-1:0] recover_data_mem_addr;
 
@@ -640,7 +644,13 @@ end
       : '0;
   end
   if (burst_len_lp == 1) begin
-    assign sbuf_data_mem_addr = sbuf_entry_lo.addr[block_offset_width_lp+:lg_sets_lp];
+
+    if(sets_p == 1) begin
+      assign sbuf_data_mem_addr = 0;
+    end else begin 
+      assign sbuf_data_mem_addr = sbuf_entry_lo.addr[block_offset_width_lp+:lg_sets_lp];
+    end
+
   end 
   else if (burst_len_lp == block_size_in_words_p) begin
     assign sbuf_data_mem_addr = sbuf_entry_lo.addr[lg_data_mask_width_lp+:sbuf_data_mem_addr_offset_lp];
@@ -857,13 +867,13 @@ end
   logic [ways_p-1:0][block_size_in_words_p-1:0] tbuf_track_mem_w_mask;
   logic [ways_p-1:0][block_size_in_words_p-1:0] tbuf_track_mem_data;
 
-  // if(sets_p == 1) begin
+  if(sets_p == 1) begin
+    assign tbuf_track_mem_addr = 0;
+  end else begin 
+    assign tbuf_track_mem_addr = tbuf_addr_lo[block_offset_width_lp+:lg_sets_lp];
+  end
 
-  // end else begin 
-
-  // end
-
-  assign tbuf_track_mem_addr = tbuf_addr_lo[block_offset_width_lp+:lg_sets_lp];
+  
   for (genvar i = 0 ; i < ways_p; i++) begin
     assign tbuf_track_mem_data[i] = {block_size_in_words_p{1'b1}};
     assign tbuf_track_mem_w_mask[i] = tbuf_way_decode[i] ? tbuf_word_offset_decode : {block_size_in_words_p{1'b0}};
