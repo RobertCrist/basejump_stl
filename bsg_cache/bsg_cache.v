@@ -1044,21 +1044,6 @@ end
     ? (miss_tag_mem_v_lo & miss_tag_mem_w_lo)
     : tagst_write_en;
 
-  // Hardcoding tag mem address if single set
-  // if(sets_p == 1) begin
-  //   assign tag_mem_addr_li = 1'b0;
-  // end else begin
-  //   always_comb begin
-  //     if(miss_v) begin
-  //       tag_mem_addr_li = recover_lo
-  //         ? addr_index_tl
-  //         : (miss_tag_mem_v_lo ? miss_tag_mem_addr_lo : addr_index);
-  //     end else begin
-  //       tag_mem_addr_li = addr_index;
-  //     end
-  //   end
-  // end
-
   always_comb begin
     if (miss_v) begin
       if(sets_p == 1) begin
@@ -1156,19 +1141,6 @@ end
     ,.data_o(plru_decode_data_lo)
     ,.mask_o(plru_decode_mask_lo)
   );
-
-  // hardcode stat mem address if single set
-  // if(sets_p == 1) begin
-  //   assign stat_mem_addr_li = 1'b0;
-  // end else begin
-  //   always_comb begin
-  //     if(miss_v) begin
-  //       stat_mem_addr_li = miss_stat_mem_addr_lo; // essentially same as addr_index_v
-  //     end else begin 
-  //       stat_mem_addr_li = addr_index_v;
-  //     end
-  //   end 
-  // end
 
   always_comb begin
     if (miss_v) begin
