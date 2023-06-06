@@ -42,9 +42,14 @@ module bsg_mem_1r1w_sync_synth #(parameter `BSG_INV_PARAM(width_p)
       wire unused0 = &{clk_i, w_v_i, w_addr_i, r_v_i, r_addr_i};
       assign r_data_o = '0;
     end
+   else if(els_p == 0)
+    begin: zz
+      wire unused0 = &{clk_i, w_v_i, w_addr_i, r_v_i, r_addr_i};
+      assign r_data_o = '0;
+    end
    else
     begin: nz
-
+   
    logic [width_p-1:0]    mem [els_p-1:0];
    logic read_en;
    logic [width_p-1:0] data_out;
@@ -75,7 +80,11 @@ module bsg_mem_1r1w_sync_synth #(parameter `BSG_INV_PARAM(width_p)
 
    always_ff @(posedge clk_i)
      if (r_v_i)
-       r_addr_r <= r_addr_i;
+       if(els_p == 1) begin
+         r_addr_r <= 0;
+       end else begin
+         r_addr_r <= r_addr_i;
+       end
      else
        r_addr_r <= 'X;
 
@@ -107,7 +116,11 @@ module bsg_mem_1r1w_sync_synth #(parameter `BSG_INV_PARAM(width_p)
 
    always_ff @(posedge clk_i)
      if (w_v_i)
-       mem[w_addr_i] <= w_data_i;
+      if(els_p == 1) begin
+        mem[0] <= w_data_i;
+      end else begin
+        mem[w_addr_i] <= w_data_i;
+      end
 
    end
 
