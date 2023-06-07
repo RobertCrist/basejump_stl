@@ -10,6 +10,11 @@
 
 TOP = ../../..
 
+export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
+export VCS_BIN=$(VCS_RELEASE)/bin
+export VCS=vcs
+export PATH:=$(VCS_BIN):$(PATH)
+export VCS_HOME=$(VCS_RELEASE)
 ########################### SIMULATION PARAMETERS ##########################
 # place the parameters you want to scan here.
 BSG_TESTME_FILES    =   bsg_mem_1rw_sync.v bsg_mem_1rw_sync_synth.v
