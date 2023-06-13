@@ -10,13 +10,17 @@
 
 TOP = ../../..
 
+
+export LM_LICENSE_FILE=27008@synopsysls.s.uw.edu
 export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
 export VCS_BIN=$(VCS_RELEASE)/bin
 export VCS=vcs
+export PATH:=$(VCS_BIN):$(PATH)
+export VCS_HOME=$(VCS_RELEASE)
 
 ########################### SIMULATION PARAMETERS ##########################
 # place the parameters you want to scan here.
-BSG_TESTME_FILES    =   bsg_mem_1rw_sync.v
+BSG_TESTME_FILES    =   bsg_mem_1rw_sync.v bsg_mem_1rw_sync_synth.v
 BSG_TESTME_DIR      =   $(TOP)/bsg_mem
 BSG_MISC_FILES      =   bsg_defines.v bsg_cycle_counter.v
 BSG_ASYNC_FILES     = 
@@ -40,7 +44,7 @@ scan_params = WIDTH_P ELS_P
 # note; if you leave out values for a variable, then the product of the
 # sets is null, and nothing will run.
 WIDTH_P = 1 4 5
-ELS_P   = 0 1 2 3 4 5 8 
+ELS_P   = 1 2 3 4 5 8 
 ############################################################################
 
 ############################# SIMULATOR COMMANDS ###########################
@@ -50,13 +54,7 @@ BSG_IP_CORES_COMP = vlog -sv -mfcu -work $(TOP)/work \
 
 BSG_IP_CORES_SIM  = vsim -batch -lib $(TOP)/work $(TEST_MODULE) -do "run -all; quit -f"
 
-# BSG_IP_CORES_COMP = vcs -full64 -sverilog -timescale=1ps/1ps
-# BSG_IP_CORES_ELAB = /usr/bin/true || 
-# BSG_IP_CORES_SIM = ./simv
 
-# BSG_IP_CORES_SIM_DEFINE_PARAM = +define+
-# BSG_IP_CORES_SIM_INCLUDE_DIRS = +incdir+$(TOP)/bsg_test +incdir+$(TOP)/bsg_misc +incdir+$(TOP)/bsg_dataflow
-# BSG_IP_CORES_SIM_CLEAN_FILES  = simv*
 ############################################################################
 
 
@@ -100,3 +98,5 @@ run.%:
 initial:
 	@echo removing outfile
 	rm -f outfile
+
+include ../../Makefile.sim
