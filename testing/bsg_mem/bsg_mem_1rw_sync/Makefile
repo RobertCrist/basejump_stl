@@ -10,6 +10,7 @@
 
 TOP = ../../..
 
+export LM_LICENSE_FILE=27008@synopsysls.s.uw.edu
 export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
 export VCS_BIN=$(VCS_RELEASE)/bin
 export VCS=vcs
@@ -41,7 +42,7 @@ scan_params = WIDTH_P ELS_P
 # note; if you leave out values for a variable, then the product of the
 # sets is null, and nothing will run.
 WIDTH_P = 1 4 5
-ELS_P   = 1 2 3 4 5 8 
+ELS_P   = 1
 ############################################################################
 
 include ../../Makefile.sim

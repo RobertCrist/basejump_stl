@@ -1,0 +1,22 @@
+Chronologic VCS simulator copyright 1991-2020
+Contains Synopsys proprietary information.
+Compiler version Q-2020.03-SP1_Full64; Runtime version Q-2020.03-SP1_Full64;  Jun  8 14:42 2023
+
+
+
+
+===========================================================
+testing bsg_mem_1rw_sync with ...
+WIDTH_P: 5
+ELS_P  : 1
+
+## bsg_mem_1rw_sync_synth: instantiating width_p=          5, els_p=          1 (test_bsg.DUT.synth)
+test_bsg.clock_gen with cycle_time_p          20
+=======================================================
+
+$finish called from file "test_bsg.v", line 118.
+$finish at simulation time                   10
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 10 ps
+CPU Time:      0.200 seconds;       Data structure size:   0.0Mb
+Thu Jun  8 14:42:26 2023
