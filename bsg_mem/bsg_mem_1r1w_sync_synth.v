@@ -112,11 +112,11 @@ module bsg_mem_1r1w_sync_synth #(parameter `BSG_INV_PARAM(width_p)
 
    always_ff @(posedge clk_i)
      if (w_v_i)
-      if(els_p == 1) begin
-        mem['0] <= w_data_i;
-      end else begin
-        mem[w_addr_i] <= w_data_i;
-      end
+       if(els_p == 1) begin
+         mem['0] <= w_data_i;
+       end else begin
+         mem[w_addr_i] <= w_data_i;
+       end
 
    end
 

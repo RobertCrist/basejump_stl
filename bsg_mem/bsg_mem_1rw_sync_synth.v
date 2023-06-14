@@ -82,11 +82,7 @@ module bsg_mem_1rw_sync_synth
 
     always_ff @(posedge clk_i)
       if (v_i & w_i) 
-        if(els_p == 1)
-          mem['0] <= data_i;
-        else
-          mem[addr_i] <= data_i;
-
+        mem[addr_li] <= data_i;
    end // non_zero_width
    // synopsys translate_off
    initial

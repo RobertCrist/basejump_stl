@@ -100,10 +100,7 @@ module bsg_mem_1rw_sync_mask_write_bit_synth
 
    always_ff @(posedge clk_i)
      if (v_i & w_i)
-       if(els_p == 1)
-         mem['0] <= data_n;
-       else
-         mem[addr_i] <= data_n;
+       mem[addr_li][i] <= data_i[i];
 
 `else 
  
@@ -116,10 +113,11 @@ module bsg_mem_1rw_sync_mask_write_bit_synth
      if (v_i & w_i)
        for (integer i = 0; i < width_p; i=i+1)
          if (w_mask_i[i])
-           if(els_p == 1)
-             mem['0][i] <= data_i[i];
-           else
-             mem[addr_i][i] <= data_i[i];
+          //  if(els_p == 1)
+          //    mem['0][i] <= data_i[i];
+          //  else
+          //    mem[addr_i][i] <= data_i[i];
+           mem[addr_li][i] <= data_i[i];
 `endif
    end
 endmodule
