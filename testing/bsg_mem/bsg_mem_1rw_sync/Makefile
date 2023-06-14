@@ -43,8 +43,8 @@ scan_params = WIDTH_P ELS_P
 # this is a list of all values for each variable in the scan_params list
 # note; if you leave out values for a variable, then the product of the
 # sets is null, and nothing will run.
-WIDTH_P = 1 4 5
-ELS_P   = 1 2 3 4 5 8 
+WIDTH_P = 0 1 4 5
+ELS_P   = 1 
 ############################################################################
 
 ############################# SIMULATOR COMMANDS ###########################

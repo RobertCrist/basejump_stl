@@ -64,10 +64,12 @@ module test_bsg
     $display("testing bsg_mem_1rw_sync with ...");
     $display("WIDTH_P: %0d", width_p);
     $display("ELS_P  : %0d\n", els_p);
+    $display("addr_width_p  : %0d\n", addr_width_p);
   end
 
   logic [width_p-1:0] test_input_data, test_input_data_r
                        , test_output_data, test_output_data_r;
+
   logic [addr_width_p-1:0] test_input_addr;
   logic test_input_w, test_input_v;
 
@@ -99,7 +101,7 @@ module test_bsg
 
     if(reset)
       begin
-        test_input_addr <= addr_width_p'(0);
+        test_input_addr <= '0;
         test_input_w    <= 1'b1;
         test_input_v    <= 1'b1;
       end
