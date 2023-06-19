@@ -412,6 +412,7 @@ module bsg_cache_miss
       // For the flush ops, go straight to RECOVER.
       SEND_EVICT_DATA: begin
         dma_cmd_o = e_dma_send_evict_data; 
+        dma_cmd_o = e_dma_send_evict_data; 
         dma_addr_o = {
           tag_v_i[dma_way_o],
           {(sets_p>1){addr_index_v}},

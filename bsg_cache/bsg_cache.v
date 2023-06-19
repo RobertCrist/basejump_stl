@@ -114,6 +114,8 @@ module bsg_cache
     = cache_pkt.addr[way_offset_width_lp+:lg_ways_lp];
   assign addr_index
     = cache_pkt.addr[block_offset_width_lp+:lg_sets_lp];
+  assign addr_index
+    = cache_pkt.addr[block_offset_width_lp+:lg_sets_lp];
 
   logic [lg_data_mem_els_lp-1:0] ld_data_mem_addr;
 
@@ -330,6 +332,8 @@ end
 
   assign addr_tag_v =
     addr_v_r[way_offset_width_lp+:tag_width_lp];
+  assign addr_index_v =
+    addr_v_r[block_offset_width_lp+:lg_sets_lp];
   assign addr_index_v =
     addr_v_r[block_offset_width_lp+:lg_sets_lp];
   assign addr_way_v =
@@ -1208,7 +1212,7 @@ end
       end
     end
   end
-//test
+
 
   if (debug_p) begin
     always_ff @ (posedge clk_i) begin
