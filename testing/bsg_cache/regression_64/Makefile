@@ -1,7 +1,7 @@
 #dont need if on uw ece machine
 include ../../../../bsg_cadenv/cadenv.mk
 export BASEJUMP_STL_DIR = $(abspath ../../..)
-
+# test
 # export LM_LICENSE_FILE=27008@synopsysls.s.uw.edu
 # export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
 # export VCS_BIN=$(VCS_RELEASE)/bin
