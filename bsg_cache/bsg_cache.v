@@ -859,7 +859,6 @@ end
   logic [ways_p-1:0][block_size_in_words_p-1:0] tbuf_track_mem_data;
 
   assign tbuf_track_mem_addr = tbuf_addr_lo[block_offset_width_lp+:lg_sets_lp];
-  
   for (genvar i = 0 ; i < ways_p; i++) begin
     assign tbuf_track_mem_data[i] = {block_size_in_words_p{1'b1}};
     assign tbuf_track_mem_w_mask[i] = tbuf_way_decode[i] ? tbuf_word_offset_decode : {block_size_in_words_p{1'b0}};
@@ -1098,7 +1097,6 @@ end
       : (((decode.ld_op | decode.atomic_op | partial_st) & yumi_o)
         ? addr_index
         : tbuf_track_mem_addr));
-  
 
   // stat_mem ctrl logic
   // TAGST clears the stat_info as it exits tv stage.
