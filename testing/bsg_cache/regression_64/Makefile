@@ -1,17 +1,17 @@
 #dont need if on uw ece machine
-#include ../../../../bsg_cadenv/cadenv.mk
+include ../../../../bsg_cadenv/cadenv.mk
 export BASEJUMP_STL_DIR = $(abspath ../../..)
 
-export LM_LICENSE_FILE=27008@synopsysls.s.uw.edu
-export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
-export VCS_BIN=$(VCS_RELEASE)/bin
-export VCS=vcs
-export _DVE=dve
-export VERDI_HOME :=/home/projects/ee477.2023wtr/cad/synopsys/verdi/Q-2020.03-SP2-8
-export VERDI := $(VERDI_HOME)/bin/verdi
-export PATH:=$(VCS_BIN):$(PATH)
+# export LM_LICENSE_FILE=27008@synopsysls.s.uw.edu
+# export VCS_RELEASE=/home/projects/ee477.2023wtr/cad/synopsys/vcs/Q-2020.03-SP1
+# export VCS_BIN=$(VCS_RELEASE)/bin
+# export VCS=vcs
+# export _DVE=dve
+# export VERDI_HOME :=/home/projects/ee477.2023wtr/cad/synopsys/verdi/Q-2020.03-SP2-8
+# export VERDI := $(VERDI_HOME)/bin/verdi
+# export PATH:=$(VCS_BIN):$(PATH)
 
-export VCS_HOME=$(VCS_RELEASE)
+# export VCS_HOME=$(VCS_RELEASE)
 
 # export LM_LICENSE_FILE := 27020@localhost
 # export VCS_HOME := /gro/cad/synopsys/vcs/Q-2020.03-SP1
