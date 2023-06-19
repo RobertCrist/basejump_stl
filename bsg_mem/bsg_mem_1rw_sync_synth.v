@@ -27,6 +27,7 @@ module bsg_mem_1rw_sync_synth
   wire unused = reset_i;
 
   if (width_p == 0 || els_p == 0)
+  if (width_p == 0 || els_p == 0)
    begin: z
      wire unused0 = &{clk_i, v_i, data_i, addr_i, w_i};
      assign data_o = '0;
@@ -43,6 +44,8 @@ module bsg_mem_1rw_sync_synth
 
     assign read_en = v_i & ~w_i;
     assign data_out = mem[addr_r];
+    assign read_en = v_i & ~w_i;
+    assign data_out = mem[addr_r];
 
     always_ff @ (posedge clk_i) 
       if (read_en)
@@ -53,7 +56,17 @@ module bsg_mem_1rw_sync_synth
     if (latch_last_read_p)
       begin: llr
         logic read_en_r; 
+    if (latch_last_read_p)
+      begin: llr
+        logic read_en_r; 
 
+        bsg_dff #(
+          .width_p(1)
+        ) read_en_dff (
+          .clk_i(clk_i)
+          ,.data_i(read_en)
+          ,.data_o(read_en_r)
+        );
         bsg_dff #(
           .width_p(1)
         ) read_en_dff (
