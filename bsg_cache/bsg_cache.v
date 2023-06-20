@@ -124,6 +124,7 @@ module bsg_cache
   end
   else if (burst_len_lp == block_size_in_words_p) begin
     assign ld_data_mem_addr = {{(sets_p>1){addr_index}}, cache_pkt.addr[lg_data_mask_width_lp+:lg_block_size_in_words_lp]};
+    assign ld_data_mem_addr = {{(sets_p>1){addr_index}}, cache_pkt.addr[lg_data_mask_width_lp+:lg_block_size_in_words_lp]};
   end
   else begin
     assign ld_data_mem_addr = {addr_index, cache_pkt.addr[lg_data_mask_width_lp+lg_burst_size_in_words_lp+:lg_burst_len_lp]};
@@ -177,6 +178,7 @@ module bsg_cache
     assign recover_data_mem_addr = addr_index_tl;
   end
   else if (burst_len_lp == block_size_in_words_p) begin
+    assign recover_data_mem_addr = {{(sets_p>1){addr_index_tl}}, addr_tl_r[lg_data_mask_width_lp+:lg_block_size_in_words_lp]};
     assign recover_data_mem_addr = {{(sets_p>1){addr_index_tl}}, addr_tl_r[lg_data_mask_width_lp+:lg_block_size_in_words_lp]};
   end
   else begin
