@@ -192,10 +192,10 @@ module bsg_cache_miss
 
   // chosen way lru decode
   //
-  // logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_data;
-  // logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_mask;
-  logic [ways_p-2:0] chosen_way_lru_data;
-  logic [ways_p-2:0] chosen_way_lru_mask;
+  logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_data;
+  logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_mask;
+  // logic [ways_p-2:0] chosen_way_lru_data;
+  // logic [ways_p-2:0] chosen_way_lru_mask;
 
   bsg_lru_pseudo_tree_decode #(
     .ways_p(ways_p)
@@ -218,13 +218,13 @@ module bsg_cache_miss
   // that the LRU way falls back to the same locked way soon and then forms "LRU trap"
   logic [lg_ways_lp-1:0] lru_way_id;
 
-  // logic [((ways_p>1) ? ways_p-2:0):0] modify_mask_lo;
-  // logic [((ways_p>1) ? ways_p-2:0):0] modify_data_lo;
-  // logic [((ways_p>1) ? ways_p-2:0):0] modified_lru_bits;
+  logic [((ways_p>1) ? ways_p-2:0):0] modify_mask_lo;
+  logic [((ways_p>1) ? ways_p-2:0):0] modify_data_lo;
+  logic [((ways_p>1) ? ways_p-2:0):0] modified_lru_bits;
   
-  logic [ways_p-2:0] modify_mask_lo;
-  logic [ways_p-2:0] modify_data_lo;
-  logic [ways_p-2:0] modified_lru_bits;
+  // logic [ways_p-2:0] modify_mask_lo;
+  // logic [ways_p-2:0] modify_data_lo;
+  // logic [ways_p-2:0] modified_lru_bits;
 
   bsg_lru_pseudo_tree_backup #(
     .ways_p(ways_p)
@@ -235,8 +235,8 @@ module bsg_cache_miss
   );
 
   bsg_mux_bitwise #(
-    //.width_p(((ways_p>1) ? (ways_p-1):ways_p))
-    .width_p(ways_p-1)
+    .width_p(((ways_p>1) ? (ways_p-1):ways_p))
+    //.width_p(ways_p-1)
   ) lru_bit_mux (
     .data0_i(stat_info_in.lru_bits)
     ,.data1_i(modify_data_lo)
@@ -366,13 +366,13 @@ module bsg_cache_miss
         stat_mem_w_o = 1'b1;
         stat_mem_data_out.dirty = {ways_p{1'b0}};
 
-        // stat_mem_data_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
-        stat_mem_data_out.lru_bits = {ways_p-1{1'b0}};
+        stat_mem_data_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
+        // stat_mem_data_out.lru_bits = {ways_p-1{1'b0}};
 
         stat_mem_w_mask_out.dirty = flush_way_decode;
 
-        // stat_mem_w_mask_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
-        stat_mem_w_mask_out.lru_bits = {ways_p-1{1'b0}};
+        stat_mem_w_mask_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
+        // stat_mem_w_mask_out.lru_bits = {ways_p-1{1'b0}};
 
         // If it's invalidate op, then clear the valid bit for the chosen way.
         // Otherwise, do not touch the valid bits.
