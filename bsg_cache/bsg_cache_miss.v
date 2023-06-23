@@ -357,13 +357,10 @@ module bsg_cache_miss
         // LRU bit does not need to be updated.
         stat_mem_v_o = 1'b1;
         stat_mem_w_o = 1'b1;
-        stat_mem_data_out.dirty = {ways_p{1'b0}};
-
-        stat_mem_data_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
-
+        stat_mem_data_out.dirty = '0;
+        stat_mem_data_out.lru_bits = '0;
         stat_mem_w_mask_out.dirty = flush_way_decode;
-
-        stat_mem_w_mask_out.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
+        stat_mem_w_mask_out.lru_bits = '0;
 
         // If it's invalidate op, then clear the valid bit for the chosen way.
         // Otherwise, do not touch the valid bits.
@@ -430,7 +427,7 @@ module bsg_cache_miss
         // set stat mem entry on store tag miss.
         stat_mem_v_o = dma_done_i & st_tag_miss_op;
         stat_mem_w_o = 1'b1;
-        stat_mem_data_out.dirty = {ways_p{1'b1}};
+        stat_mem_data_out.dirty = '1;
         stat_mem_data_out.lru_bits = chosen_way_lru_data;
         stat_mem_w_mask_out.dirty = chosen_way_decode;
         stat_mem_w_mask_out.lru_bits = chosen_way_lru_mask;

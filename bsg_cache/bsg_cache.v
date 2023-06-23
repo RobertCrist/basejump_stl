@@ -1139,10 +1139,10 @@ end
 
       if (decode_v_r.tagst_op) begin
         // for TAGST
-        stat_mem_data_li.dirty = {ways_p{1'b0}};
-        stat_mem_data_li.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b0}};
-        stat_mem_w_mask_li.dirty = {ways_p{1'b1}};        
-        stat_mem_w_mask_li.lru_bits = {(ways_p>1 ? ways_p-1:1){1'b1}};
+        stat_mem_data_li.dirty = '0;
+        stat_mem_data_li.lru_bits = '0;
+        stat_mem_w_mask_li.dirty = '1;        
+        stat_mem_w_mask_li.lru_bits = '1;
       end
       else begin
         // for LD, ST
