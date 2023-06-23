@@ -120,7 +120,7 @@ module bsg_cache
   assign addr_index
     = cache_pkt.addr[block_offset_width_lp+:lg_sets_lp];
   assign addr_index
-    = cache_pkt.addr[block_offset_width_lp+:lg_sets_lp];
+      = cache_pkt.addr[block_offset_width_lp+:lg_sets_lp];
 
   logic [lg_data_mem_els_lp-1:0] ld_data_mem_addr;
 
