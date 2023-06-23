@@ -192,8 +192,8 @@ module bsg_cache_miss
 
   // chosen way lru decode
   //
-  logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_data;
-  logic [((ways_p>1) ? ways_p-2:0):0] chosen_way_lru_mask;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] chosen_way_lru_data;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] chosen_way_lru_mask;
 
   bsg_lru_pseudo_tree_decode #(
     .ways_p(ways_p)
@@ -216,9 +216,9 @@ module bsg_cache_miss
   // that the LRU way falls back to the same locked way soon and then forms "LRU trap"
   logic [lg_ways_lp-1:0] lru_way_id;
 
-  logic [((ways_p>1) ? ways_p-2:0):0] modify_mask_lo;
-  logic [((ways_p>1) ? ways_p-2:0):0] modify_data_lo;
-  logic [((ways_p>1) ? ways_p-2:0):0] modified_lru_bits;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] modify_mask_lo;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] modify_data_lo;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] modified_lru_bits;
   
   bsg_lru_pseudo_tree_backup #(
     .ways_p(ways_p)

@@ -1113,8 +1113,8 @@ end
   // If it's load or store, and there is a hit, it updates the dirty bits and LRU.
   // If there is a miss, stat_mem may be modified by the miss handler.
 
-  logic [((ways_p>1) ? ways_p-2:0):0] plru_decode_data_lo;
-  logic [((ways_p>1) ? ways_p-2:0):0] plru_decode_mask_lo;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] plru_decode_data_lo;
+  logic [`BSG_SAFE_MINUS(ways_p,2):0] plru_decode_mask_lo;
     
   bsg_lru_pseudo_tree_decode #(
     .ways_p(ways_p)
