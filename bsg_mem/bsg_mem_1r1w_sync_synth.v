@@ -109,6 +109,13 @@ module bsg_mem_1r1w_sync_synth #(parameter `BSG_INV_PARAM(width_p)
       assign r_data_o = data_out;
     end
 
+   logic [addr_width_lp-1:0] w_addr_li;
+
+   if(els_p == 1) 
+     assign w_addr_li = '0;
+   else 
+     assign w_addr_li = w_addr_i;
+
    always_ff @(posedge clk_i)
      if (w_v_i)
        mem[w_addr_li] <= w_data_i;
