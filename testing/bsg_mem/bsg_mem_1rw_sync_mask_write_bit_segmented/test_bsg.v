@@ -1,5 +1,5 @@
 `define WIDTH_P 32
-`define ELS_P   4
+`define ELS_P   0
 `define SEED_P  20
 
 `include "bsg_defines.v"
