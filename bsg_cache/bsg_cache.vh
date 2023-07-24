@@ -48,7 +48,6 @@
 
   `define bsg_cache_stat_info_width(ways_mp) \
     (((ways_mp>1)?(ways_mp+ways_mp-1):2))
-    (((ways_mp>1)?(ways_mp+ways_mp-1):2))
 
   // sbuf entry s
   //

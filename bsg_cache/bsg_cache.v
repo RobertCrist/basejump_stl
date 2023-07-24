@@ -36,7 +36,6 @@ module bsg_cache
     ,localparam burst_size_in_words_lp=(dma_data_width_p/data_width_p)
 
     ,parameter debug_p=0
-    ,parameter debug_p=0
   )
   (
     input clk_i

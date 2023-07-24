@@ -27,15 +27,13 @@ module bsg_mem_1rw_sync_synth
   wire unused = reset_i;
 
   if (width_p == 0 || els_p == 0)
-  if (width_p == 0 || els_p == 0)
    begin: z
      wire unused0 = &{clk_i, v_i, data_i, addr_i, w_i};
      assign data_o = '0;
    end
   else
    begin: nz
-
-    logic [addr_width_lp-1:0] addr_r;
+  
     logic [addr_width_lp-1:0] addr_r;
     logic [width_p-1:0]    mem [els_p-1:0];
     logic read_en;
@@ -61,13 +59,6 @@ module bsg_mem_1rw_sync_synth
       begin: llr
         logic read_en_r; 
 
-        bsg_dff #(
-          .width_p(1)
-        ) read_en_dff (
-          .clk_i(clk_i)
-          ,.data_i(read_en)
-          ,.data_o(read_en_r)
-        );
         bsg_dff #(
           .width_p(1)
         ) read_en_dff (
@@ -112,7 +103,7 @@ module bsg_mem_1rw_sync_synth
        assert ( (v_i !== 1'b1) || (reset_i === 'X) || (reset_i === 1'b1) || (addr_i < els_p) || (els_p <= 1))
          else $error("Invalid address %x to %m of size %x (reset_i = %b, v_i = %b, clk_i = %b)\n", addr_i, els_p, reset_i, v_i, clk_i);
    // synopsys translate_on
-
+   end
 endmodule
 
 `BSG_ABSTRACT_MODULE(bsg_mem_1rw_sync_synth)
